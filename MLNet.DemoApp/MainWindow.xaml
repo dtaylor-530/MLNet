@@ -1,0 +1,84 @@
+﻿<Window x:Class="MLNet.DemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MLNet.DemoApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+
+        <XmlDataProvider x:Key="Pages">
+            <x:XData>
+                <Pages xmlns="">
+                    <Page Uri="\Pages\NBAPage.xaml"
+                          Title="NBA" />
+                    <Page Uri="\Pages\BikeSharing.xaml"
+                          Title="Bike Sharing" />
+                  
+                </Pages>
+            </x:XData>
+        </XmlDataProvider>
+    </Window.Resources>
+
+    <Grid SnapsToDevicePixels="True" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Border>
+            <!--<FrameworkElement.Resources>
+                <ResourceDictionary Source="/AvalonLibrary;component/themes/avalon.xaml" />
+            </FrameworkElement.Resources>-->
+            <ListBox Name="PageList"
+                     SelectedIndex="0"
+                     ItemsSource="{Binding Source={StaticResource Pages}, XPath=Pages/Page}"
+                     VerticalAlignment="Top"
+SelectedValuePath="@Uri"
+                     DisplayMemberPath="@Title"
+                     Margin="10,10,20,10"
+                     BorderThickness="0"
+                     FontSize="20"
+                     Foreground="DarkKhaki"
+                     Background="Transparent"
+                     >
+
+
+            </ListBox>
+        </Border>
+        <Border Grid.Column="1"
+                Background="White"
+                Padding="0,10,10,10">
+            <Frame Name="ContentFrame"
+                   Source="{Binding ElementName=PageList, Path=SelectedValue}"
+                   NavigationUIVisibility="Hidden" />
+        </Border>
+
+        
+        <!--<Border Grid.Column="1"
+                Background="White"
+                Padding="0,10,10,10">
+            <Frame Name="ContentFrame"
+                   Source="{Binding ElementName=PageList, Path=SelectedValue}"
+                   NavigationUIVisibility="Hidden" />
+
+
+            <Frame Name="ContentFrame"
+                   NavigationUIVisibility="Hidden" >
+             
+            </Frame>
+        </Border>-->
+
+    </Grid>
+    <!--<local:NBAPage></local:NBAPage>-->
+    <!--<local:BikeSharingPage></local:BikeSharingPage>-->
+    <!--<TabControl>
+        <TabItem Header="NBA Page">
+ 
+        </TabItem>
+        <TabItem Header="Bike Sharing">
+            <local:BikeSharingPage></local:BikeSharingPage>
+        </TabItem>
+    </TabControl>-->
+</Window>
